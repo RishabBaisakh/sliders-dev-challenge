@@ -1,5 +1,5 @@
-function generateRandomNumber(min: number, max: number): number {
-  return Math.floor(Math.random() * (max - min) + min);
+function generateRandomNumber(max: number): number {
+  return Math.floor(Math.random() * max);
 }
 
 function getSliderValues(size: number): Array<number> {
@@ -8,7 +8,7 @@ function getSliderValues(size: number): Array<number> {
   let generatedNumber;
   const sliderValues: Array<number> = [];
   for (let i = 0; i < size - 1; i++) {
-    generatedNumber = generateRandomNumber(0, max - sum);
+    generatedNumber = generateRandomNumber(max - sum);
     sliderValues.push(generatedNumber);
     sum += generatedNumber;
   }

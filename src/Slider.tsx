@@ -13,13 +13,16 @@ function Slider(props: SliderProps) {
   };
 
   return (
-    <input
-      type="range"
-      min="0"
-      max="100"
-      onChange={handleInputChange}
-      value={sliderValue}
-    ></input>
+    <div className="slider">
+      <input
+        type="range"
+        min="0"
+        max="100"
+        onChange={handleInputChange}
+        value={sliderValue}
+      ></input>
+      <p>{sliderValue}</p>
+    </div>
   );
 }
 

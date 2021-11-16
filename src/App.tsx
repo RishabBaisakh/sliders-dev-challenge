@@ -6,6 +6,7 @@ import Slider from "./Slider";
 
 function App() {
   const [numberOfSliders, setNumberOfSliders] = useState(5);
+  const [isDisabled, setDisabled] = useState(false);
   const [sliderValues, setSliderValues] = useState(
     getSliderValues(numberOfSliders)
   );
@@ -15,8 +16,8 @@ function App() {
     while (true) {
       changePosition = generateRandomNumber(numberOfSliders);
       if (changePosition === position) continue;
-      else if (value > 0 && sliderValues[changePosition] === 0) continue;
-      else if (value < 0 && sliderValues[changePosition] === 100) continue;
+      else if (value > 0 && sliderValues[changePosition] <= 0) continue;
+      else if (value < 0 && sliderValues[changePosition] >= 100) continue;
       else break;
     }
     sliderValues[changePosition] -= value;
@@ -25,15 +26,24 @@ function App() {
   };
 
   const addNewSlider = () => {
+    if (sliderValues.length === 10) {
+      alert("Max Limit Reached");
+      setDisabled(true);
+      return;
+    }
     setSliderValues([...sliderValues, 0]);
     setNumberOfSliders(numberOfSliders + 1);
   };
+
+  const lockSlider = (position: number) => {};
 
   return (
     <div className="app">
       <div className="chartContainer">
         <Chart values={sliderValues} />
-        <button onClick={addNewSlider}> Add new Slider</button>
+        <button onClick={addNewSlider} disabled={isDisabled}>
+          {"Add new Slider"}
+        </button>
       </div>
       <div className="sliderContainer">
         {sliderValues.map((sliderValue, index) => (
@@ -42,6 +52,7 @@ function App() {
             value={sliderValue}
             position={index}
             handleChange={handleChange}
+            lockSlider={lockSlider}
           />
         ))}
       </div>

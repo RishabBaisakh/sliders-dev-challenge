@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 
 export declare interface SliderProps {
   value: number;
+  position: number;
+  handleChange: (value: number, position: number) => void;
 }
 
 function Slider(props: SliderProps) {
-  const { value } = props;
-  const [sliderValue, setSliderValue] = useState(value);
-
-  const handleInputChange = (event: any) => {
-    setSliderValue(event.target.value);
-  };
+  const { value, position, handleChange } = props;
 
   return (
     <div className="slider">
@@ -18,10 +15,12 @@ function Slider(props: SliderProps) {
         type="range"
         min="0"
         max="100"
-        onChange={handleInputChange}
-        value={sliderValue}
+        onChange={(event: any) =>
+          handleChange(event.target.value - value, position)
+        }
+        value={value}
       ></input>
-      <p>{sliderValue}</p>
+      <p>{value}</p>
     </div>
   );
 }

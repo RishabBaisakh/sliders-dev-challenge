@@ -20,9 +20,21 @@ code {
 .sliderContainer {
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  height: 400px;
   padding: 30px;
 }
 
 .slider {
   display: flex;
+  margin: 5px;
+  padding: 5px;
+}
+
+.addSliderButton {
+  width: 100%;
+  height: 30px;
+  background: wheat;
+  border: 1px solid lightcoral;
+  border-radius: 6px;
 }
